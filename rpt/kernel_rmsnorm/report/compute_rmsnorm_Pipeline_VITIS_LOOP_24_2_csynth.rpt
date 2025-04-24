@@ -1,0 +1,147 @@
+
+
+================================================================
+== Vitis HLS Report for 'compute_rmsnorm_Pipeline_VITIS_LOOP_24_2'
+================================================================
+* Date:           Thu Apr 24 21:11:38 2025
+
+* Version:        2024.2 (Build 5238294 on Nov  8 2024)
+* Project:        kernel_rmsnorm
+* Solution:       hls (Vitis Kernel Flow Target)
+* Product family: zynquplus
+* Target device:  xczu7ev-ffvc1156-2-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  3.075 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+------------------------------------------------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval |                    Pipeline                    |
+    |   min   |   max   |    min   |    max   | min | max |                      Type                      |
+    +---------+---------+----------+----------+-----+-----+------------------------------------------------+
+    |      290|      290|  2.900 us|  2.900 us|  289|  289|  loop auto-rewind stp (delay=0 clock cycles(s))|
+    +---------+---------+----------+----------+-----+-----+------------------------------------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                   |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |     Loop Name     |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_24_2  |      288|      288|         2|          1|          1|   288|       yes|
+        +-------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+------+--------+--------+-----+
+|       Name      | BRAM_18K|  DSP |   FF   |   LUT  | URAM|
++-----------------+---------+------+--------+--------+-----+
+|DSP              |        -|     -|       -|       -|    -|
+|Expression       |        -|     -|       0|      36|    -|
+|FIFO             |        -|     -|       -|       -|    -|
+|Instance         |        -|     -|       -|       -|    -|
+|Memory           |        -|     -|       -|       -|    -|
+|Multiplexer      |        -|     -|       0|      45|    -|
+|Register         |        -|     -|      21|       -|    -|
++-----------------+---------+------+--------+--------+-----+
+|Total            |        0|     0|      21|      81|    0|
++-----------------+---------+------+--------+--------+-----+
+|Available        |      624|  1728|  460800|  230400|   96|
++-----------------+---------+------+--------+--------+-----+
+|Utilization (%)  |        0|     0|      ~0|      ~0|    0|
++-----------------+---------+------+--------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +---------------------------+----------+----+---+----+------------+------------+
+    |       Variable Name       | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +---------------------------+----------+----+---+----+------------+------------+
+    |add_ln24_fu_73_p2          |         +|   0|  0|  16|           9|           1|
+    |ap_block_pp0_stage0_11001  |       and|   0|  0|   2|           1|           1|
+    |icmp_ln24_fu_67_p2         |      icmp|   0|  0|  16|           9|           9|
+    |ap_enable_pp0              |       xor|   0|  0|   2|           1|           2|
+    +---------------------------+----------+----+---+----+------------+------------+
+    |Total                      |          |   0|  0|  36|          20|          13|
+    +---------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------+----+-----------+-----+-----------+
+    |           Name          | LUT| Input Size| Bits| Total Bits|
+    +-------------------------+----+-----------+-----+-----------+
+    |ap_done_int              |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1  |   9|          2|    1|          2|
+    |ap_sig_allocacmp_i       |   9|          2|    9|         18|
+    |i_1_fu_36                |   9|          2|    9|         18|
+    |vec_stream_2_blk_n       |   9|          2|    1|          2|
+    +-------------------------+----+-----------+-----+-----------+
+    |Total                    |  45|         10|   21|         42|
+    +-------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------+---+----+-----+-----------+
+    |           Name          | FF| LUT| Bits| Const Bits|
+    +-------------------------+---+----+-----+-----------+
+    |ap_CS_fsm                |  1|   0|    1|          0|
+    |ap_done_reg              |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1  |  1|   0|    1|          0|
+    |i_1_fu_36                |  9|   0|    9|          0|
+    |i_reg_100                |  9|   0|    9|          0|
+    +-------------------------+---+----+-----+-----------+
+    |Total                    | 21|   0|   21|          0|
+    +-------------------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-----------------------------+-----+-----+------------+------------------------------------------+--------------+
+|          RTL Ports          | Dir | Bits|  Protocol  |               Source Object              |    C Type    |
++-----------------------------+-----+-----+------------+------------------------------------------+--------------+
+|ap_clk                       |   in|    1|  ap_ctrl_hs|  compute_rmsnorm_Pipeline_VITIS_LOOP_24_2|  return value|
+|ap_rst                       |   in|    1|  ap_ctrl_hs|  compute_rmsnorm_Pipeline_VITIS_LOOP_24_2|  return value|
+|ap_start                     |   in|    1|  ap_ctrl_hs|  compute_rmsnorm_Pipeline_VITIS_LOOP_24_2|  return value|
+|ap_done                      |  out|    1|  ap_ctrl_hs|  compute_rmsnorm_Pipeline_VITIS_LOOP_24_2|  return value|
+|ap_idle                      |  out|    1|  ap_ctrl_hs|  compute_rmsnorm_Pipeline_VITIS_LOOP_24_2|  return value|
+|ap_ready                     |  out|    1|  ap_ctrl_hs|  compute_rmsnorm_Pipeline_VITIS_LOOP_24_2|  return value|
+|vec_stream_2_dout            |   in|   32|     ap_fifo|                              vec_stream_2|       pointer|
+|vec_stream_2_empty_n         |   in|    1|     ap_fifo|                              vec_stream_2|       pointer|
+|vec_stream_2_read            |  out|    1|     ap_fifo|                              vec_stream_2|       pointer|
+|vec_stream_2_num_data_valid  |   in|    3|     ap_fifo|                              vec_stream_2|       pointer|
+|vec_stream_2_fifo_cap        |   in|    3|     ap_fifo|                              vec_stream_2|       pointer|
+|vec_local_2_address0         |  out|    9|   ap_memory|                               vec_local_2|         array|
+|vec_local_2_ce0              |  out|    1|   ap_memory|                               vec_local_2|         array|
+|vec_local_2_we0              |  out|    1|   ap_memory|                               vec_local_2|         array|
+|vec_local_2_d0               |  out|   32|   ap_memory|                               vec_local_2|         array|
++-----------------------------+-----+-----+------------+------------------------------------------+--------------+
+

@@ -1,0 +1,227 @@
+
+
+================================================================
+== Synthesis Summary Report of 'kernel_rmsnorm'
+================================================================
++ General Information: 
+    * Date:           Thu Apr 24 21:11:44 2025
+    * Version:        2024.2 (Build 5238294 on Nov  8 2024)
+    * Project:        kernel_rmsnorm
+    * Solution:       hls (Vitis Kernel Flow Target)
+    * Product family: zynquplus
+    * Target device:  xczu7ev-ffvc1156-2-e
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +----------------------------------------------+------+------+---------+-----------+----------+---------+------+----------+---------+---------+------------+------------+-----+
+    |                    Modules                   | Issue|      | Latency |  Latency  | Iteration|         | Trip |          |         |         |            |            |     |
+    |                    & Loops                   | Type | Slack| (cycles)|    (ns)   |  Latency | Interval| Count| Pipelined|  BRAM   |   DSP   |     FF     |     LUT    | URAM|
+    +----------------------------------------------+------+------+---------+-----------+----------+---------+------+----------+---------+---------+------------+------------+-----+
+    |+ kernel_rmsnorm*                             |     -|  0.00|        -|          -|         -|        -|     -|  dataflow|   8 (1%)|  8 (~0%)|  4194 (~0%)|   5273 (2%)|    -|
+    | + entry_proc                                 |     -|  5.46|        0|      0.000|         -|        0|     -|        no|        -|        -|     3 (~0%)|    29 (~0%)|    -|
+    | + load_vec                                   |     -|  0.00|        -|          -|         -|        -|     -|        no|        -|        -|   270 (~0%)|   776 (~0%)|    -|
+    |  + load_vec_Pipeline_mem_rd                  |     -|  0.00|        -|          -|         -|        -|     -|        no|        -|        -|    68 (~0%)|   135 (~0%)|    -|
+    |   o mem_rd                                   |     -|  7.30|        -|          -|         3|        1|     -|       yes|        -|        -|           -|           -|    -|
+    | + load_vec_1                                 |     -|  0.00|        -|          -|         -|        -|     -|        no|        -|        -|   371 (~0%)|   260 (~0%)|    -|
+    |  o mem_rd                                    |     -|  7.30|        -|          -|        74|        1|     -|       yes|        -|        -|           -|           -|    -|
+    | + compute_rmsnorm                            |     -|  0.24|     1492|  1.492e+04|         -|     1492|     -|        no|  2 (~0%)|  8 (~0%)|  1003 (~0%)|  1244 (~0%)|    -|
+    |  + compute_rmsnorm_Pipeline_VITIS_LOOP_21_1  |     -|  4.22|      290|  2.900e+03|         -|      290|     -|        no|        -|        -|    21 (~0%)|    81 (~0%)|    -|
+    |   o VITIS_LOOP_21_1                          |     -|  7.30|      288|  2.880e+03|         2|        1|   288|       yes|        -|        -|           -|           -|    -|
+    |  + compute_rmsnorm_Pipeline_VITIS_LOOP_24_2  |     -|  4.22|      290|  2.900e+03|         -|      290|     -|        no|        -|        -|    21 (~0%)|    81 (~0%)|    -|
+    |   o VITIS_LOOP_24_2                          |     -|  7.30|      288|  2.880e+03|         2|        1|   288|       yes|        -|        -|           -|           -|    -|
+    |  + compute_rmsnorm_Pipeline_VITIS_LOOP_28_3  |     -|  0.28|      871|  8.710e+03|         -|      871|     -|        no|        -|        -|   115 (~0%)|   117 (~0%)|    -|
+    |   o VITIS_LOOP_28_3                          |    II|  7.30|      869|  8.690e+03|         9|        3|   288|       yes|        -|        -|           -|           -|    -|
+    |  + compute_rmsnorm_Pipeline_VITIS_LOOP_35_4  |     -|  0.28|      297|  2.970e+03|         -|      297|     -|        no|        -|  3 (~0%)|   355 (~0%)|   248 (~0%)|    -|
+    |   o VITIS_LOOP_35_4                          |     -|  7.30|      295|  2.950e+03|         9|        1|   288|       yes|        -|        -|           -|           -|    -|
+    | + store_result                               |     -|  0.00|        -|          -|         -|        -|     -|        no|        -|        -|   267 (~0%)|   779 (~0%)|    -|
+    |  + store_result_Pipeline_mem_wr              |     -|  0.00|        -|          -|         -|        -|     -|        no|        -|        -|    68 (~0%)|   139 (~0%)|    -|
+    |   o mem_wr                                   |     -|  7.30|        -|          -|         3|        1|     -|       yes|        -|        -|           -|           -|    -|
+    +----------------------------------------------+------+------+---------+-----------+----------+---------+------+----------+---------+---------+------------+------------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* M_AXI
++-------------+------------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+-------------------+
+| Interface   | Read/Write | Data Width | Address Width | Latency | Offset | Register | Max Widen | Max Read     | Max Write    | Num Read    | Num Write   | Resource Estimate |
+|             |            | (SW->HW)   |               |         |        |          | Bitwidth  | Burst Length | Burst Length | Outstanding | Outstanding |                   |
++-------------+------------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+-------------------+
+| m_axi_gmem0 | READ_WRITE | 32 -> 32   | 64            | 64      | slave  | 0        | 512       | 16           | 16           | 16          | 16          | BRAM=4            |
+| m_axi_gmem1 | READ_ONLY  | 32 -> 32   | 64            | 64      | slave  | 0        | 512       | 16           | 16           | 16          | 16          | BRAM=2            |
++-------------+------------+------------+---------------+---------+--------+----------+-----------+--------------+--------------+-------------+-------------+-------------------+
+
+* S_AXILITE Interfaces
++---------------+------------+---------------+--------+----------+
+| Interface     | Data Width | Address Width | Offset | Register |
++---------------+------------+---------------+--------+----------+
+| s_axi_control | 32         | 6             | 16     | 0        |
++---------------+------------+---------------+--------+----------+
+
+* S_AXILITE Registers
++---------------+-----------+--------+-------+--------+----------------------------------+------------------------------------------------------------------------------------+
+| Interface     | Register  | Offset | Width | Access | Description                      | Bit Fields                                                                         |
++---------------+-----------+--------+-------+--------+----------------------------------+------------------------------------------------------------------------------------+
+| s_axi_control | CTRL      | 0x00   | 32    | RW     | Control signals                  | 0=AP_START 1=AP_DONE 2=AP_IDLE 3=AP_READY 4=AP_CONTINUE 7=AUTO_RESTART 9=INTERRUPT |
+| s_axi_control | GIER      | 0x04   | 32    | RW     | Global Interrupt Enable Register | 0=Enable                                                                           |
+| s_axi_control | IP_IER    | 0x08   | 32    | RW     | IP Interrupt Enable Register     | 0=CHAN0_INT_EN 1=CHAN1_INT_EN                                                      |
+| s_axi_control | IP_ISR    | 0x0c   | 32    | RW     | IP Interrupt Status Register     | 0=CHAN0_INT_ST 1=CHAN1_INT_ST                                                      |
+| s_axi_control | i_vec_1_1 | 0x10   | 32    | W      | Data signal of i_vec_1           |                                                                                    |
+| s_axi_control | i_vec_1_2 | 0x14   | 32    | W      | Data signal of i_vec_1           |                                                                                    |
+| s_axi_control | i_vec_2_1 | 0x1c   | 32    | W      | Data signal of i_vec_2           |                                                                                    |
+| s_axi_control | i_vec_2_2 | 0x20   | 32    | W      | Data signal of i_vec_2           |                                                                                    |
+| s_axi_control | o_vec_1   | 0x28   | 32    | W      | Data signal of o_vec             |                                                                                    |
+| s_axi_control | o_vec_2   | 0x2c   | 32    | W      | Data signal of o_vec             |                                                                                    |
+| s_axi_control | vec_size  | 0x34   | 32    | W      | Data signal of vec_size          |                                                                                    |
++---------------+-----------+--------+-------+--------+----------------------------------+------------------------------------------------------------------------------------+
+
+* TOP LEVEL CONTROL
++-----------+---------------+-----------+
+| Interface | Type          | Ports     |
++-----------+---------------+-----------+
+| ap_clk    | clock         | ap_clk    |
+| ap_rst_n  | reset         | ap_rst_n  |
+| interrupt | interrupt     | interrupt |
+| ap_ctrl   | ap_ctrl_chain |           |
++-----------+---------------+-----------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++----------+-----------+----------+
+| Argument | Direction | Datatype |
++----------+-----------+----------+
+| i_vec_1  | inout     | float*   |
+| i_vec_2  | in        | float*   |
+| o_vec    | inout     | float*   |
+| vec_size | in        | int      |
++----------+-----------+----------+
+
+* SW-to-HW Mapping
++----------+---------------+-----------+----------+-------------------------------------+
+| Argument | HW Interface  | HW Type   | HW Usage | HW Info                             |
++----------+---------------+-----------+----------+-------------------------------------+
+| i_vec_1  | m_axi_gmem0   | interface |          | channel=0                           |
+| i_vec_1  | s_axi_control | register  | offset   | name=i_vec_1_1 offset=0x10 range=32 |
+| i_vec_1  | s_axi_control | register  | offset   | name=i_vec_1_2 offset=0x14 range=32 |
+| i_vec_2  | m_axi_gmem1   | interface |          | channel=0                           |
+| i_vec_2  | s_axi_control | register  | offset   | name=i_vec_2_1 offset=0x1c range=32 |
+| i_vec_2  | s_axi_control | register  | offset   | name=i_vec_2_2 offset=0x20 range=32 |
+| o_vec    | m_axi_gmem0   | interface |          | channel=0                           |
+| o_vec    | s_axi_control | register  | offset   | name=o_vec_1 offset=0x28 range=32   |
+| o_vec    | s_axi_control | register  | offset   | name=o_vec_2 offset=0x2c range=32   |
+| vec_size | s_axi_control | register  |          | name=vec_size offset=0x34 range=32  |
++----------+---------------+-----------+----------+-------------------------------------+
+
+
+================================================================
+== M_AXI Burst Information
+================================================================
+ Note: All burst requests might be further partitioned into multiple requests during RTL generation based on max_read_burst_length or max_write_burst_length settings.
+
+* Inferred Burst Summary
++--------------+-----------+----------+-------+--------+--------------------------------------------+
+| HW Interface | Direction | Length   | Width | Loop   | Loop Location                              |
++--------------+-----------+----------+-------+--------+--------------------------------------------+
+| m_axi_gmem0  | read      | variable | 32    | mem_rd | /home/yfc/swan/src/kernel_rmsnorm.cpp:9:3  |
+| m_axi_gmem0  | write     | variable | 32    | mem_wr | /home/yfc/swan/src/kernel_rmsnorm.cpp:43:3 |
+| m_axi_gmem1  | read      | variable | 32    | mem_rd | /home/yfc/swan/src/kernel_rmsnorm.cpp:9:3  |
++--------------+-----------+----------+-------+--------+--------------------------------------------+
+
+* All M_AXI Variable Accesses
++-------------------+----------+---------------------------------------------+-----------+--------------+----------+--------+--------------------------------------------+------------+------------------------------------------------+
+| HW Interface      | Variable | Access Location                             | Direction | Burst Status | Length   | Loop   | Loop Location                              | Resolution | Problem                                        |
++-------------------+----------+---------------------------------------------+-----------+--------------+----------+--------+--------------------------------------------+------------+------------------------------------------------+
+| m_axi_gmem0       | out      | /home/yfc/swan/src/kernel_rmsnorm.cpp:44:12 | write     | Widen Fail   |          | mem_wr | /home/yfc/swan/src/kernel_rmsnorm.cpp:43:3 | 214-234    | Sequential access length is not divisible by 2 |
+| m_axi_gmem0       | out      | /home/yfc/swan/src/kernel_rmsnorm.cpp:44:12 | write     | Inferred     | variable | mem_wr | /home/yfc/swan/src/kernel_rmsnorm.cpp:43:3 |            |                                                |
+| m_axi_gmem0,gmem1 | i_vec    | /home/yfc/swan/src/kernel_rmsnorm.cpp:10:14 | read      | Widen Fail   |          | mem_rd | /home/yfc/swan/src/kernel_rmsnorm.cpp:9:3  | 214-234    | Sequential access length is not divisible by 2 |
+| m_axi_gmem0,gmem1 | i_vec    | /home/yfc/swan/src/kernel_rmsnorm.cpp:10:14 | read      | Inferred     | variable | mem_rd | /home/yfc/swan/src/kernel_rmsnorm.cpp:9:3  |            |                                                |
++-------------------+----------+---------------------------------------------+-----------+--------------+----------+--------+--------------------------------------------+------------+------------------------------------------------+
+
+    * Resolution URL: docs.xilinx.com/access/sources/dita/topic?Doc_Version=2024.2%20English&url=ug1448-hls-guidance&resourceid=XXX-YYY.html (replace XXX-YYY with column value)
+
+================================================================
+== Bind Op Report
+================================================================
++----------------------------------------------+-----+--------+------------+--------+----------+---------+
+| Name                                         | DSP | Pragma | Variable   | Op     | Impl     | Latency |
++----------------------------------------------+-----+--------+------------+--------+----------+---------+
+| + kernel_rmsnorm                             | 8   |        |            |        |          |         |
+|  + load_vec                                  | 0   |        |            |        |          |         |
+|    icmp_ln9_fu_92_p2                         |     |        | icmp_ln9   | setgt  | auto     | 0       |
+|    empty_fu_102_p3                           |     |        | empty      | select | auto_sel | 0       |
+|   + load_vec_Pipeline_mem_rd                 | 0   |        |            |        |          |         |
+|     icmp_ln9_fu_92_p2                        |     |        | icmp_ln9   | setlt  | auto     | 0       |
+|     add_ln9_fu_98_p2                         |     |        | add_ln9    | add    | fabric   | 0       |
+|  + load_vec_1                                | 0   |        |            |        |          |         |
+|    icmp_ln9_fu_106_p2                        |     |        | icmp_ln9   | setgt  | auto     | 0       |
+|    empty_fu_116_p3                           |     |        | empty      | select | auto_sel | 0       |
+|    icmp_ln9_1_fu_140_p2                      |     |        | icmp_ln9_1 | setlt  | auto     | 0       |
+|    add_ln9_fu_146_p2                         |     |        | add_ln9    | add    | fabric   | 0       |
+|  + compute_rmsnorm                           | 8   |        |            |        |          |         |
+|    fdiv_32ns_32ns_32_9_no_dsp_1_U31          |     |        | div_i      | fdiv   | fabric   | 8       |
+|    fadd_32ns_32ns_32_4_full_dsp_1_U30        | 2   |        | p_x_assign | fadd   | fulldsp  | 3       |
+|    fsqrt_32ns_32ns_32_8_no_dsp_1_U32         |     |        | tmp_i      | fsqrt  | fabric   | 7       |
+|    fdiv_32ns_32ns_32_9_no_dsp_1_U31          |     |        | norm       | fdiv   | fabric   | 8       |
+|   + compute_rmsnorm_Pipeline_VITIS_LOOP_21_1 | 0   |        |            |        |          |         |
+|     icmp_ln21_fu_67_p2                       |     |        | icmp_ln21  | seteq  | auto     | 0       |
+|     add_ln21_fu_73_p2                        |     |        | add_ln21   | add    | fabric   | 0       |
+|   + compute_rmsnorm_Pipeline_VITIS_LOOP_24_2 | 0   |        |            |        |          |         |
+|     icmp_ln24_fu_67_p2                       |     |        | icmp_ln24  | seteq  | auto     | 0       |
+|     add_ln24_fu_73_p2                        |     |        | add_ln24   | add    | fabric   | 0       |
+|   + compute_rmsnorm_Pipeline_VITIS_LOOP_28_3 | 0   |        |            |        |          |         |
+|     icmp_ln28_fu_83_p2                       |     |        | icmp_ln28  | seteq  | auto     | 0       |
+|     add_ln28_fu_89_p2                        |     |        | add_ln28   | add    | fabric   | 0       |
+|   + compute_rmsnorm_Pipeline_VITIS_LOOP_35_4 | 3   |        |            |        |          |         |
+|     icmp_ln35_fu_101_p2                      |     |        | icmp_ln35  | seteq  | auto     | 0       |
+|     i_2_fu_107_p2                            |     |        | i_2        | add    | fabric   | 0       |
+|     fmul_32ns_32ns_32_3_max_dsp_1_U25        | 3   |        | mul2_i     | fmul   | maxdsp   | 2       |
+|  + store_result                              | 0   |        |            |        |          |         |
+|    icmp_ln43_fu_83_p2                        |     |        | icmp_ln43  | setgt  | auto     | 0       |
+|    empty_fu_103_p3                           |     |        | empty      | select | auto_sel | 0       |
+|   + store_result_Pipeline_mem_wr             | 0   |        |            |        |          |         |
+|     icmp_ln43_fu_96_p2                       |     |        | icmp_ln43  | setlt  | auto     | 0       |
+|     add_ln43_fu_102_p2                       |     |        | add_ln43   | add    | fabric   | 0       |
++----------------------------------------------+-----+--------+------------+--------+----------+---------+
+
+
+================================================================
+== Storage Report
+================================================================
++--------------------+--------------+-------------+------+------+--------+--------------+------+---------+------------------+
+| Name               | Usage        | Type        | BRAM | URAM | Pragma | Variable     | Impl | Latency | Bitwidth, Depth, |
+|                    |              |             |      |      |        |              |      |         | Banks            |
++--------------------+--------------+-------------+------+------+--------+--------------+------+---------+------------------+
+| + kernel_rmsnorm   |              |             | 8    | 0    |        |              |      |         |                  |
+|   control_s_axi_U  | interface    | s_axilite   |      |      |        |              |      |         |                  |
+|   gmem0_m_axi_U    | interface    | m_axi       | 4    |      |        |              |      |         |                  |
+|   gmem1_m_axi_U    | interface    | m_axi       | 2    |      |        |              |      |         |                  |
+|   o_vec_c_U        | fifo channel | scalar prop |      |      |        | o_vec_c      | srl  | 0       | 64, 4, 1         |
+|   vec_size_c_U     | fifo channel | scalar prop |      |      |        | vec_size_c   | srl  | 0       | 32, 3, 1         |
+|   vec_stream_1_U   | fifo channel | stream      |      |      |        | vec_stream_1 | srl  | 0       | 32, 2, 1         |
+|   vec_stream_2_U   | fifo channel | stream      |      |      |        | vec_stream_2 | srl  | 0       | 32, 2, 1         |
+|   out_stream_U     | fifo channel | stream      |      |      |        | out_stream   | srl  | 0       | 32, 2, 1         |
+|  + compute_rmsnorm |              |             | 2    | 0    |        |              |      |         |                  |
+|    vec_local_1_U   | ram_1p array |             | 2    |      |        | vec_local_1  | auto | 1       | 32, 288, 1       |
+|    vec_local_2_U   | ram_1p array |             | 2    |      |        | vec_local_2  | auto | 1       | 32, 288, 1       |
++--------------------+--------------+-------------+------+------+--------+--------------+------+---------+------------------+
+
+
+================================================================
+== Pragma Report
+================================================================
+* Valid Pragma Syntax
++-----------+-------------------------------------+--------------------------------------------------------+
+| Type      | Options                             | Location                                               |
++-----------+-------------------------------------+--------------------------------------------------------+
+| interface | m_axi port = i_vec_1 bundle = gmem0 | ../../swan/src/kernel_rmsnorm.cpp:51 in kernel_rmsnorm |
+| interface | m_axi port = i_vec_2 bundle = gmem1 | ../../swan/src/kernel_rmsnorm.cpp:52 in kernel_rmsnorm |
+| interface | m_axi port = o_vec bundle = gmem0   | ../../swan/src/kernel_rmsnorm.cpp:53 in kernel_rmsnorm |
+| dataflow  |                                     | ../../swan/src/kernel_rmsnorm.cpp:59 in kernel_rmsnorm |
++-----------+-------------------------------------+--------------------------------------------------------+
+
+

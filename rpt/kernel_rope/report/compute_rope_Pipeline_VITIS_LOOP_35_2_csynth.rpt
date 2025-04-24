@@ -1,0 +1,158 @@
+
+
+================================================================
+== Vitis HLS Report for 'compute_rope_Pipeline_VITIS_LOOP_35_2'
+================================================================
+* Date:           Thu Apr 24 21:16:03 2025
+
+* Version:        2024.2 (Build 5238294 on Nov  8 2024)
+* Project:        kernel_rope
+* Solution:       hls (Vitis Kernel Flow Target)
+* Product family: zynquplus
+* Target device:  xczu7ev-ffvc1156-2-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  2.515 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+------------------------------------------------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval |                    Pipeline                    |
+    |   min   |   max   |    min   |    max   | min | max |                      Type                      |
+    +---------+---------+----------+----------+-----+-----+------------------------------------------------+
+    |       26|       26|  0.260 us|  0.260 us|   25|   25|  loop auto-rewind stp (delay=0 clock cycles(s))|
+    +---------+---------+----------+----------+-----+-----+------------------------------------------------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                   |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |     Loop Name     |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_35_2  |       24|       24|         2|          1|          1|    24|       yes|
+        +-------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+------+--------+--------+-----+
+|       Name      | BRAM_18K|  DSP |   FF   |   LUT  | URAM|
++-----------------+---------+------+--------+--------+-----+
+|DSP              |        -|     -|       -|       -|    -|
+|Expression       |        -|     -|       0|      30|    -|
+|FIFO             |        -|     -|       -|       -|    -|
+|Instance         |        -|     -|       -|       -|    -|
+|Memory           |        -|     -|       -|       -|    -|
+|Multiplexer      |        -|     -|       0|      54|    -|
+|Register         |        -|     -|      13|       -|    -|
++-----------------+---------+------+--------+--------+-----+
+|Total            |        0|     0|      13|      84|    0|
++-----------------+---------+------+--------+--------+-----+
+|Available        |      624|  1728|  460800|  230400|   96|
++-----------------+---------+------+--------+--------+-----+
+|Utilization (%)  |        0|     0|      ~0|      ~0|    0|
++-----------------+---------+------+--------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +---------------------------------------+----------+----+---+----+------------+------------+
+    |             Variable Name             | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +---------------------------------------+----------+----+---+----+------------+------------+
+    |add_ln35_fu_96_p2                      |         +|   0|  0|  12|           5|           1|
+    |ap_block_pp0_stage0_11001              |       and|   0|  0|   2|           1|           1|
+    |icmp_ln35_fu_90_p2                     |      icmp|   0|  0|  12|           5|           5|
+    |ap_block_state2_pp0_stage0_iter1_grp1  |        or|   0|  0|   2|           1|           1|
+    |ap_enable_pp0                          |       xor|   0|  0|   2|           1|           2|
+    +---------------------------------------+----------+----+---+----+------------+------------+
+    |Total                                  |          |   0|  0|  30|          13|          10|
+    +---------------------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +-------------------------+----+-----------+-----+-----------+
+    |           Name          | LUT| Input Size| Bits| Total Bits|
+    +-------------------------+----+-----------+-----+-----------+
+    |ap_done_int              |   9|          2|    1|          2|
+    |ap_enable_reg_pp0_iter1  |   9|          2|    1|          2|
+    |ap_sig_allocacmp_i       |   9|          2|    5|         10|
+    |cos_vec_stream_blk_n     |   9|          2|    1|          2|
+    |i_1_fu_40                |   9|          2|    5|         10|
+    |sin_vec_stream_blk_n     |   9|          2|    1|          2|
+    +-------------------------+----+-----------+-----+-----------+
+    |Total                    |  54|         12|   14|         28|
+    +-------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------+---+----+-----+-----------+
+    |           Name          | FF| LUT| Bits| Const Bits|
+    +-------------------------+---+----+-----+-----------+
+    |ap_CS_fsm                |  1|   0|    1|          0|
+    |ap_done_reg              |  1|   0|    1|          0|
+    |ap_enable_reg_pp0_iter1  |  1|   0|    1|          0|
+    |i_1_fu_40                |  5|   0|    5|          0|
+    |i_reg_129                |  5|   0|    5|          0|
+    +-------------------------+---+----+-----+-----------+
+    |Total                    | 13|   0|   13|          0|
+    +-------------------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-------------------------------+-----+-----+------------+---------------------------------------+--------------+
+|           RTL Ports           | Dir | Bits|  Protocol  |             Source Object             |    C Type    |
++-------------------------------+-----+-----+------------+---------------------------------------+--------------+
+|ap_clk                         |   in|    1|  ap_ctrl_hs|  compute_rope_Pipeline_VITIS_LOOP_35_2|  return value|
+|ap_rst                         |   in|    1|  ap_ctrl_hs|  compute_rope_Pipeline_VITIS_LOOP_35_2|  return value|
+|ap_start                       |   in|    1|  ap_ctrl_hs|  compute_rope_Pipeline_VITIS_LOOP_35_2|  return value|
+|ap_done                        |  out|    1|  ap_ctrl_hs|  compute_rope_Pipeline_VITIS_LOOP_35_2|  return value|
+|ap_idle                        |  out|    1|  ap_ctrl_hs|  compute_rope_Pipeline_VITIS_LOOP_35_2|  return value|
+|ap_ready                       |  out|    1|  ap_ctrl_hs|  compute_rope_Pipeline_VITIS_LOOP_35_2|  return value|
+|cos_vec_stream_dout            |   in|   32|     ap_fifo|                         cos_vec_stream|       pointer|
+|cos_vec_stream_empty_n         |   in|    1|     ap_fifo|                         cos_vec_stream|       pointer|
+|cos_vec_stream_read            |  out|    1|     ap_fifo|                         cos_vec_stream|       pointer|
+|cos_vec_stream_num_data_valid  |   in|    3|     ap_fifo|                         cos_vec_stream|       pointer|
+|cos_vec_stream_fifo_cap        |   in|    3|     ap_fifo|                         cos_vec_stream|       pointer|
+|sin_vec_stream_dout            |   in|   32|     ap_fifo|                         sin_vec_stream|       pointer|
+|sin_vec_stream_empty_n         |   in|    1|     ap_fifo|                         sin_vec_stream|       pointer|
+|sin_vec_stream_read            |  out|    1|     ap_fifo|                         sin_vec_stream|       pointer|
+|sin_vec_stream_num_data_valid  |   in|    3|     ap_fifo|                         sin_vec_stream|       pointer|
+|sin_vec_stream_fifo_cap        |   in|    3|     ap_fifo|                         sin_vec_stream|       pointer|
+|cos_local_address0             |  out|    5|   ap_memory|                              cos_local|         array|
+|cos_local_ce0                  |  out|    1|   ap_memory|                              cos_local|         array|
+|cos_local_we0                  |  out|    1|   ap_memory|                              cos_local|         array|
+|cos_local_d0                   |  out|   32|   ap_memory|                              cos_local|         array|
+|sin_local_address0             |  out|    5|   ap_memory|                              sin_local|         array|
+|sin_local_ce0                  |  out|    1|   ap_memory|                              sin_local|         array|
+|sin_local_we0                  |  out|    1|   ap_memory|                              sin_local|         array|
+|sin_local_d0                   |  out|   32|   ap_memory|                              sin_local|         array|
++-------------------------------+-----+-----+------------+---------------------------------------+--------------+
+

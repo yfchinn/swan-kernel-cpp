@@ -1,0 +1,190 @@
+
+
+================================================================
+== Vitis HLS Report for 'compute_rmsnorm'
+================================================================
+* Date:           Thu Apr 24 21:11:40 2025
+
+* Version:        2024.2 (Build 5238294 on Nov  8 2024)
+* Project:        kernel_rmsnorm
+* Solution:       hls (Vitis Kernel Flow Target)
+* Product family: zynquplus
+* Target device:  xczu7ev-ffvc1156-2-e
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  7.057 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+------+------+---------+
+    |  Latency (cycles) |   Latency (absolute)  |   Interval  | Pipeline|
+    |   min   |   max   |    min    |    max    |  min |  max |   Type  |
+    +---------+---------+-----------+-----------+------+------+---------+
+    |     1492|     1492|  14.920 us|  14.920 us|  1492|  1492|       no|
+    +---------+---------+-----------+-----------+------+------+---------+
+
+    + Detail: 
+        * Instance: 
+        +----------------------------------------------------+------------------------------------------+---------+---------+----------+----------+-----+-----+------------------------------------------------+
+        |                                                    |                                          |  Latency (cycles) |  Latency (absolute) |  Interval |                    Pipeline                    |
+        |                      Instance                      |                  Module                  |   min   |   max   |    min   |    max   | min | max |                      Type                      |
+        +----------------------------------------------------+------------------------------------------+---------+---------+----------+----------+-----+-----+------------------------------------------------+
+        |grp_compute_rmsnorm_Pipeline_VITIS_LOOP_21_1_fu_48  |compute_rmsnorm_Pipeline_VITIS_LOOP_21_1  |      290|      290|  2.900 us|  2.900 us|  289|  289|  loop auto-rewind stp (delay=0 clock cycles(s))|
+        |grp_compute_rmsnorm_Pipeline_VITIS_LOOP_24_2_fu_56  |compute_rmsnorm_Pipeline_VITIS_LOOP_24_2  |      290|      290|  2.900 us|  2.900 us|  289|  289|  loop auto-rewind stp (delay=0 clock cycles(s))|
+        |grp_compute_rmsnorm_Pipeline_VITIS_LOOP_28_3_fu_63  |compute_rmsnorm_Pipeline_VITIS_LOOP_28_3  |      871|      871|  8.710 us|  8.710 us|  867|  867|  loop auto-rewind stp (delay=0 clock cycles(s))|
+        |grp_compute_rmsnorm_Pipeline_VITIS_LOOP_35_4_fu_69  |compute_rmsnorm_Pipeline_VITIS_LOOP_35_4  |      297|      297|  2.970 us|  2.970 us|  289|  289|  loop auto-rewind stp (delay=0 clock cycles(s))|
+        +----------------------------------------------------+------------------------------------------+---------+---------+----------+----------+-----+-----+------------------------------------------------+
+
+        * Loop: 
+        N/A
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+------+--------+--------+-----+
+|       Name      | BRAM_18K|  DSP |   FF   |   LUT  | URAM|
++-----------------+---------+------+--------+--------+-----+
+|DSP              |        -|     -|       -|       -|    -|
+|Expression       |        -|     -|       0|       4|    -|
+|FIFO             |        -|     -|       -|       -|    -|
+|Instance         |        -|     8|     867|     876|    -|
+|Memory           |        2|     -|       0|       0|    0|
+|Multiplexer      |        -|     -|       0|     364|    -|
+|Register         |        -|     -|     136|       -|    -|
++-----------------+---------+------+--------+--------+-----+
+|Total            |        2|     8|    1003|    1244|    0|
++-----------------+---------+------+--------+--------+-----+
+|Available        |      624|  1728|  460800|  230400|   96|
++-----------------+---------+------+--------+--------+-----+
+|Utilization (%)  |       ~0|    ~0|      ~0|      ~0|    0|
++-----------------+---------+------+--------+--------+-----+
+
++ Detail: 
+    * Instance: 
+    +----------------------------------------------------+------------------------------------------+---------+----+-----+-----+-----+
+    |                      Instance                      |                  Module                  | BRAM_18K| DSP|  FF | LUT | URAM|
+    +----------------------------------------------------+------------------------------------------+---------+----+-----+-----+-----+
+    |grp_compute_rmsnorm_Pipeline_VITIS_LOOP_21_1_fu_48  |compute_rmsnorm_Pipeline_VITIS_LOOP_21_1  |        0|   0|   21|   81|    0|
+    |grp_compute_rmsnorm_Pipeline_VITIS_LOOP_24_2_fu_56  |compute_rmsnorm_Pipeline_VITIS_LOOP_24_2  |        0|   0|   21|   81|    0|
+    |grp_compute_rmsnorm_Pipeline_VITIS_LOOP_28_3_fu_63  |compute_rmsnorm_Pipeline_VITIS_LOOP_28_3  |        0|   0|  115|  117|    0|
+    |grp_compute_rmsnorm_Pipeline_VITIS_LOOP_35_4_fu_69  |compute_rmsnorm_Pipeline_VITIS_LOOP_35_4  |        0|   3|  355|  248|    0|
+    |fadd_32ns_32ns_32_4_full_dsp_1_U30                  |fadd_32ns_32ns_32_4_full_dsp_1            |        0|   2|  227|  214|    0|
+    |fdiv_32ns_32ns_32_9_no_dsp_1_U31                    |fdiv_32ns_32ns_32_9_no_dsp_1              |        0|   0|    0|    0|    0|
+    |fmul_32ns_32ns_32_3_max_dsp_1_U33                   |fmul_32ns_32ns_32_3_max_dsp_1             |        0|   3|  128|  135|    0|
+    |fsqrt_32ns_32ns_32_8_no_dsp_1_U32                   |fsqrt_32ns_32ns_32_8_no_dsp_1             |        0|   0|    0|    0|    0|
+    +----------------------------------------------------+------------------------------------------+---------+----+-----+-----+-----+
+    |Total                                               |                                          |        0|   8|  867|  876|    0|
+    +----------------------------------------------------+------------------------------------------+---------+----+-----+-----+-----+
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    +---------------+-------------------------------------------+---------+---+----+-----+------+-----+------+-------------+
+    |     Memory    |                   Module                  | BRAM_18K| FF| LUT| URAM| Words| Bits| Banks| W*Bits*Banks|
+    +---------------+-------------------------------------------+---------+---+----+-----+------+-----+------+-------------+
+    |vec_local_1_U  |compute_rmsnorm_vec_local_1_RAM_AUTO_1R1W  |        1|  0|   0|    0|   288|   32|     1|         9216|
+    |vec_local_2_U  |compute_rmsnorm_vec_local_1_RAM_AUTO_1R1W  |        1|  0|   0|    0|   288|   32|     1|         9216|
+    +---------------+-------------------------------------------+---------+---+----+-----+------+-----+------+-------------+
+    |Total          |                                           |        2|  0|   0|    0|   576|   64|     2|        18432|
+    +---------------+-------------------------------------------+---------+---+----+-----+------+-----+------+-------------+
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +---------------------------------+----------+----+---+----+------------+------------+
+    |          Variable Name          | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +---------------------------------+----------+----+---+----+------------+------------+
+    |ap_block_state1                  |        or|   0|  0|   2|           1|           1|
+    |ap_block_state4_on_subcall_done  |        or|   0|  0|   2|           1|           1|
+    +---------------------------------+----------+----+---+----+------------+------------+
+    |Total                            |          |   0|  0|   4|           2|           2|
+    +---------------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +----------------------+-----+-----------+-----+-----------+
+    |         Name         | LUT | Input Size| Bits| Total Bits|
+    +----------------------+-----+-----------+-----+-----------+
+    |ap_NS_fsm             |  162|         36|    1|         36|
+    |ap_done               |    9|          2|    1|          2|
+    |grp_fu_180_ce         |   14|          3|    1|          3|
+    |grp_fu_180_p0         |   14|          3|   32|         96|
+    |grp_fu_180_p1         |   14|          3|   32|         96|
+    |grp_fu_78_ce          |    9|          2|    1|          2|
+    |grp_fu_78_p0          |   14|          3|   32|         96|
+    |grp_fu_78_p1          |   14|          3|   32|         96|
+    |grp_fu_83_p0          |   14|          3|   32|         96|
+    |grp_fu_83_p1          |   14|          3|   32|         96|
+    |vec_local_1_address0  |   20|          4|    9|         36|
+    |vec_local_1_ce0       |   20|          4|    1|          4|
+    |vec_local_1_we0       |    9|          2|    1|          2|
+    |vec_local_2_address0  |   14|          3|    9|         27|
+    |vec_local_2_ce0       |   14|          3|    1|          3|
+    |vec_local_2_we0       |    9|          2|    1|          2|
+    +----------------------+-----+-----------+-----+-----------+
+    |Total                 |  364|         79|  218|        693|
+    +----------------------+-----+-----------+-----+-----------+
+
+    * Register: 
+    +-----------------------------------------------------------------+----+----+-----+-----------+
+    |                               Name                              | FF | LUT| Bits| Const Bits|
+    +-----------------------------------------------------------------+----+----+-----+-----------+
+    |ap_CS_fsm                                                        |  35|   0|   35|          0|
+    |ap_done_reg                                                      |   1|   0|    1|          0|
+    |grp_compute_rmsnorm_Pipeline_VITIS_LOOP_21_1_fu_48_ap_start_reg  |   1|   0|    1|          0|
+    |grp_compute_rmsnorm_Pipeline_VITIS_LOOP_24_2_fu_56_ap_start_reg  |   1|   0|    1|          0|
+    |grp_compute_rmsnorm_Pipeline_VITIS_LOOP_28_3_fu_63_ap_start_reg  |   1|   0|    1|          0|
+    |grp_compute_rmsnorm_Pipeline_VITIS_LOOP_35_4_fu_69_ap_start_reg  |   1|   0|    1|          0|
+    |p_x_assign_reg_170                                               |  32|   0|   32|          0|
+    |reg_95                                                           |  32|   0|   32|          0|
+    |tmp_i_reg_175                                                    |  32|   0|   32|          0|
+    +-----------------------------------------------------------------+----+----+-----+-----------+
+    |Total                                                            | 136|   0|  136|          0|
+    +-----------------------------------------------------------------+----+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++-----------------------------+-----+-----+------------+-----------------+--------------+
+|          RTL Ports          | Dir | Bits|  Protocol  |  Source Object  |    C Type    |
++-----------------------------+-----+-----+------------+-----------------+--------------+
+|ap_clk                       |   in|    1|  ap_ctrl_hs|  compute_rmsnorm|  return value|
+|ap_rst                       |   in|    1|  ap_ctrl_hs|  compute_rmsnorm|  return value|
+|ap_start                     |   in|    1|  ap_ctrl_hs|  compute_rmsnorm|  return value|
+|ap_done                      |  out|    1|  ap_ctrl_hs|  compute_rmsnorm|  return value|
+|ap_continue                  |   in|    1|  ap_ctrl_hs|  compute_rmsnorm|  return value|
+|ap_idle                      |  out|    1|  ap_ctrl_hs|  compute_rmsnorm|  return value|
+|ap_ready                     |  out|    1|  ap_ctrl_hs|  compute_rmsnorm|  return value|
+|vec_stream_1_dout            |   in|   32|     ap_fifo|     vec_stream_1|       pointer|
+|vec_stream_1_empty_n         |   in|    1|     ap_fifo|     vec_stream_1|       pointer|
+|vec_stream_1_read            |  out|    1|     ap_fifo|     vec_stream_1|       pointer|
+|vec_stream_1_num_data_valid  |   in|    3|     ap_fifo|     vec_stream_1|       pointer|
+|vec_stream_1_fifo_cap        |   in|    3|     ap_fifo|     vec_stream_1|       pointer|
+|vec_stream_2_dout            |   in|   32|     ap_fifo|     vec_stream_2|       pointer|
+|vec_stream_2_empty_n         |   in|    1|     ap_fifo|     vec_stream_2|       pointer|
+|vec_stream_2_read            |  out|    1|     ap_fifo|     vec_stream_2|       pointer|
+|vec_stream_2_num_data_valid  |   in|    3|     ap_fifo|     vec_stream_2|       pointer|
+|vec_stream_2_fifo_cap        |   in|    3|     ap_fifo|     vec_stream_2|       pointer|
+|out_stream_din               |  out|   32|     ap_fifo|       out_stream|       pointer|
+|out_stream_full_n            |   in|    1|     ap_fifo|       out_stream|       pointer|
+|out_stream_write             |  out|    1|     ap_fifo|       out_stream|       pointer|
+|out_stream_num_data_valid    |   in|   32|     ap_fifo|       out_stream|       pointer|
+|out_stream_fifo_cap          |   in|   32|     ap_fifo|       out_stream|       pointer|
++-----------------------------+-----+-----+------------+-----------------+--------------+
+
